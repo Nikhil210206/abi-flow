@@ -3,16 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, Award } from "lucide-react";
 import { FlowBackground } from "@/components/visuals/FlowBackground";
-import { EASE } from "@/lib/motion";
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-};
+import { Reveal } from "@/components/ui/Reveal";
 
 export function Hero() {
   return (
@@ -23,14 +14,9 @@ export function Hero() {
       <FlowBackground />
 
       <div className="container-x relative z-10 py-28">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="max-w-3xl"
-        >
-          <motion.span
-            variants={item}
+        <div className="max-w-3xl">
+          <Reveal
+            as="span"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-cyan-bright backdrop-blur"
           >
             <span className="relative flex h-2 w-2">
@@ -38,27 +24,29 @@ export function Hero() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
             </span>
             44 Years of Manufacturing Excellence
-          </motion.span>
+          </Reveal>
 
-          <motion.h1
-            variants={item}
+          <Reveal
+            delay={0.08}
             className="mt-6 text-4xl font-bold leading-[1.05] sm:text-6xl md:text-7xl"
           >
-            Precision components for{" "}
-            <span className="text-gradient">Oil &amp; Gas</span> and{" "}
-            <span className="text-gradient">Renewable Energy</span>
-          </motion.h1>
+            <h1>
+              Precision components for{" "}
+              <span className="text-gradient">Oil &amp; Gas</span> and{" "}
+              <span className="text-gradient">Renewable Energy</span>
+            </h1>
+          </Reveal>
 
-          <motion.p
-            variants={item}
+          <Reveal
+            delay={0.16}
             className="mt-6 max-w-xl text-lg leading-relaxed text-mist/80"
           >
             ABI Flow Products manufactures critical machined components — valve
             trims, stems, gates and flow-control parts — trusted by global
             leaders like Flowserve, Emerson and Flender.
-          </motion.p>
+          </Reveal>
 
-          <motion.div variants={item} className="mt-9 flex flex-wrap gap-4">
+          <Reveal delay={0.24} className="mt-9 flex flex-wrap gap-4">
             <a
               href="#products"
               className="group inline-flex items-center gap-2 rounded-full bg-cyan px-7 py-3.5 text-sm font-semibold text-navy transition-transform hover:scale-105"
@@ -72,10 +60,10 @@ export function Hero() {
             >
               Talk to Us
             </a>
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            variants={item}
+          <Reveal
+            delay={0.32}
             className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-mist/70"
           >
             <span className="inline-flex items-center gap-2">
@@ -86,11 +74,11 @@ export function Hero() {
               <Award className="h-5 w-5 text-cyan" />
               15 Years of Partnership with Flowserve
             </span>
-          </motion.div>
-        </motion.div>
+          </Reveal>
+        </div>
       </div>
 
-      {/* scroll cue */}
+      {/* scroll cue (decorative only) */}
       <motion.div
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}

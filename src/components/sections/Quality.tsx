@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { BadgeCheck, RefreshCcw, Users, HeartHandshake } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { stagger, fadeUp, viewportOnce } from "@/lib/motion";
 
 const cycle = [
   { label: "Customer Satisfaction", icon: HeartHandshake },
@@ -48,41 +44,33 @@ export function Quality() {
           </Reveal>
         </div>
 
-        {/* animated quality cycle */}
-        <Reveal variants={fadeUp}>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={viewportOnce}
-            className="relative mx-auto flex max-w-md flex-col gap-4"
+        {/* quality cycle */}
+        <div className="relative mx-auto flex max-w-md flex-col gap-4">
+          <div className="absolute left-6 top-6 bottom-6 w-px bg-gradient-to-b from-cyan via-magenta to-lime" />
+          {cycle.map((c, i) => {
+            const Icon = c.icon;
+            return (
+              <Reveal
+                key={c.label}
+                delay={i * 0.1}
+                className="relative flex items-center gap-5 rounded-2xl border border-navy/10 bg-white p-5 shadow-sm"
+              >
+                <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy text-cyan">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="font-display text-lg font-bold text-navy">
+                  {c.label}
+                </span>
+              </Reveal>
+            );
+          })}
+          <Reveal
+            delay={0.3}
+            className="mt-2 text-center text-sm font-medium text-steel"
           >
-            <div className="absolute left-6 top-6 bottom-6 w-px bg-gradient-to-b from-cyan via-magenta to-lime" />
-            {cycle.map((c) => {
-              const Icon = c.icon;
-              return (
-                <motion.div
-                  key={c.label}
-                  variants={fadeUp}
-                  className="relative flex items-center gap-5 rounded-2xl border border-navy/10 bg-white p-5 shadow-sm"
-                >
-                  <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy text-cyan">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="font-display text-lg font-bold text-navy">
-                    {c.label}
-                  </span>
-                </motion.div>
-              );
-            })}
-            <motion.p
-              variants={fadeUp}
-              className="mt-2 text-center text-sm font-medium text-steel"
-            >
-              A self-reinforcing cycle at the core of our Quality Policy.
-            </motion.p>
-          </motion.div>
-        </Reveal>
+            A self-reinforcing cycle at the core of our Quality Policy.
+          </Reveal>
+        </div>
       </div>
     </section>
   );

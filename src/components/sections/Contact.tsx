@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/ui/Reveal";
-import { stagger, fadeUp, viewportOnce } from "@/lib/motion";
 
 const contactItems = [
   {
@@ -16,18 +12,21 @@ const contactItems = [
       "Chennai – 600098, Tamil Nadu, India",
     ],
     href: "https://maps.google.com/?q=Ambattur+Industrial+Estate+Chennai+600098",
+    external: true,
   },
   {
     icon: Mail,
     label: "Email Us",
     lines: ["afppur@gmail.com"],
     href: "mailto:afppur@gmail.com",
+    external: false,
   },
   {
     icon: Phone,
     label: "Call Us",
     lines: ["+91-98409 99101"],
     href: "tel:+919840999101",
+    external: false,
   },
 ];
 
@@ -51,45 +50,38 @@ export function Contact() {
           </p>
         </Reveal>
 
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="mt-14 grid gap-5 md:grid-cols-3"
-        >
-          {contactItems.map((item) => {
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {contactItems.map((item, i) => {
             const Icon = item.icon;
             return (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                target={item.icon === MapPin ? "_blank" : undefined}
-                rel="noreferrer"
-                variants={fadeUp}
-                whileHover={{ y: -4 }}
-                className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-colors hover:bg-white/[0.08]"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan/15 text-cyan-bright">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <ArrowUpRight className="h-5 w-5 text-mist/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-cyan" />
-                </div>
-                <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-cyan">
-                  {item.label}
-                </p>
-                <div className="mt-2 space-y-0.5">
-                  {item.lines.map((line) => (
-                    <p key={line} className="text-sm text-mist/85">
-                      {line}
-                    </p>
-                  ))}
-                </div>
-              </motion.a>
+              <Reveal key={item.label} delay={i * 0.08} className="h-full">
+                <a
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noreferrer" : undefined}
+                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-white/[0.08]"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan/15 text-cyan-bright">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <ArrowUpRight className="h-5 w-5 text-mist/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-cyan" />
+                  </div>
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-cyan">
+                    {item.label}
+                  </p>
+                  <div className="mt-2 space-y-0.5">
+                    {item.lines.map((line) => (
+                      <p key={line} className="text-sm text-mist/85">
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </a>
+              </Reveal>
             );
           })}
-        </motion.div>
+        </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
           <Logo light />

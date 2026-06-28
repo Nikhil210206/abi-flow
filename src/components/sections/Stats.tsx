@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { stagger, fadeUp, viewportOnce } from "@/lib/motion";
 
 const stats = [
   { value: 44, suffix: "", label: "Years of Experience" },
@@ -23,17 +19,11 @@ export function Stats() {
           description="We are an ISO 9001:2015 company catering to both domestic and international business — delivering high-quality machined metal components at a competitive price, inspected at every stage and tested 100% to international standards before dispatch."
         />
 
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="mt-16 grid grid-cols-2 gap-6 lg:grid-cols-4"
-        >
-          {stats.map((s) => (
-            <motion.div
+        <div className="mt-16 grid grid-cols-2 gap-6 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <Reveal
               key={s.label}
-              variants={fadeUp}
+              delay={i * 0.08}
               className="relative rounded-2xl border border-navy/10 bg-light p-7"
             >
               <span className="absolute left-7 top-0 h-1 w-12 -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan to-magenta" />
@@ -41,9 +31,9 @@ export function Stats() {
                 <CountUp to={s.value} suffix={s.suffix} />
               </div>
               <p className="mt-2 text-sm font-medium text-steel">{s.label}</p>
-            </motion.div>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
 
         <Reveal className="mt-10 rounded-2xl border border-navy/10 bg-navy p-8 text-mist/85 sm:p-10">
           <p className="text-lg leading-relaxed sm:text-xl">

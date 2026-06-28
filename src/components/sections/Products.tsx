@@ -1,10 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Cog } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { stagger, viewportOnce } from "@/lib/motion";
 import { productCategories } from "@/data/products";
 
 export function Products() {
@@ -18,15 +14,9 @@ export function Products() {
           description="From plug valve internals to wind turbine drive parts — supplied in sizes ½″ to 30″ across a range of certified materials."
         />
 
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {productCategories.map((cat) => (
-            <Card key={cat.id} className="flex flex-col p-7">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {productCategories.map((cat, i) => (
+            <Card key={cat.id} delay={(i % 3) * 0.08} className="flex flex-col p-7">
               {/* accent + sector badge */}
               <div className="flex items-center justify-between">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-cyan transition-colors group-hover:bg-cyan group-hover:text-navy">
@@ -66,7 +56,7 @@ export function Products() {
               </ul>
             </Card>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

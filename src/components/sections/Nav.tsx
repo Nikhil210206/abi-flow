@@ -25,12 +25,7 @@ export function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <motion.div
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="border-b border-white/10 bg-white/80 backdrop-blur-lg supports-[backdrop-filter]:bg-white/70"
-      >
+      <div className="border-b border-white/10 bg-white/80 backdrop-blur-lg supports-[backdrop-filter]:bg-white/70 motion-safe:animate-[nav-drop_0.6s_cubic-bezier(0.22,1,0.36,1)]">
         <nav className="container-x flex h-16 items-center justify-between">
           <a href="#top" aria-label="ABI Flow Products — home">
             <Logo />
@@ -71,7 +66,7 @@ export function Nav() {
           className="h-0.5 origin-left bg-gradient-to-r from-cyan via-cyan to-magenta"
           style={{ scaleX: progress }}
         />
-      </motion.div>
+      </div>
 
       <AnimatePresence>
         {open && (

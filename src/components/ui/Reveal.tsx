@@ -1,47 +1,37 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
-import { fadeUp, viewportOnce } from "@/lib/motion";
+import { useReveal } from "@/hooks/useReveal";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  variants?: Variants;
+  /** stagger offset in seconds */
   delay?: number;
-  as?: "div" | "section" | "li" | "span";
+  as?: "div" | "section" | "li" | "span" | "ul";
 };
 
 /**
- * Single source of truth for scroll-triggered reveals.
- * Used across every section so animation behaviour stays consistent
- * (and respects reduced-motion preferences automatically).
+ * Single source of truth for scroll-triggered reveals across every section.
+ * Uses a native IntersectionObserver (see useReveal) so it's reliable and can
+ * never leave content stuck invisible.
  */
 export function Reveal({
   children,
   className,
-  variants = fadeUp,
   delay = 0,
-  as = "div",
+  as: Tag = "div",
 }: RevealProps) {
-  const reduce = useReducedMotion();
-  const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
+  const { ref, shown } = useReveal<HTMLDivElement>();
 
   return (
-    <MotionTag
-      className={className}
-      variants={variants}
-      initial="hidden"
-      whileInView="show"
-      viewport={viewportOnce}
-      transition={{ delay }}
+    <Tag
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ref={ref as any}
+      className={`reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
+      style={delay ? { transitionDelay: `${delay}s` } : undefined}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

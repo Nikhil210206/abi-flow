@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Gauge, CheckCircle2 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { stagger, fadeUp, viewportOnce } from "@/lib/motion";
 import { machineHighlights, machinery } from "@/data/machinery";
 import { instruments } from "@/data/instruments";
 
@@ -65,17 +64,11 @@ export function Facility() {
         />
 
         {/* highlight machines */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="mt-16 grid gap-6 lg:grid-cols-3"
-        >
-          {machineHighlights.map((m) => (
-            <motion.div
+        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+          {machineHighlights.map((m, i) => (
+            <Reveal
               key={m.model}
-              variants={fadeUp}
+              delay={i * 0.08}
               className="relative overflow-hidden rounded-2xl border border-navy/10 bg-white p-7"
             >
               <span className="absolute right-0 top-0 h-20 w-20 translate-x-8 -translate-y-8 rounded-full bg-cyan/10 blur-2xl" />
@@ -97,9 +90,9 @@ export function Facility() {
                   </div>
                 ))}
               </dl>
-            </motion.div>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
 
         {/* inspection note */}
         <Reveal className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 rounded-2xl border border-navy/10 bg-white px-7 py-5">

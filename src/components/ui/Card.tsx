@@ -1,32 +1,26 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
-import { fadeUp, viewportOnce } from "@/lib/motion";
+import { useReveal } from "@/hooks/useReveal";
 
 type CardProps = {
   children: ReactNode;
   className?: string;
-  interactive?: boolean;
+  delay?: number;
 };
 
-export function Card({ children, className, interactive = true }: CardProps) {
-  const reduce = useReducedMotion();
+export function Card({ children, className, delay = 0 }: CardProps) {
+  const { ref, shown } = useReveal<HTMLDivElement>();
 
   return (
-    <motion.div
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={viewportOnce}
-      whileHover={
-        interactive && !reduce ? { y: -6, transition: { duration: 0.25 } } : undefined
-      }
-      className={`group relative overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-[0_2px_24px_-12px_rgba(10,26,47,0.25)] transition-shadow duration-300 hover:shadow-[0_24px_48px_-20px_rgba(10,26,47,0.35)] ${
+    <div
+      ref={ref}
+      style={delay ? { transitionDelay: `${delay}s` } : undefined}
+      className={`reveal ${shown ? "reveal-in" : ""} group relative overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-[0_2px_24px_-12px_rgba(10,26,47,0.25)] hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-20px_rgba(10,26,47,0.35)] ${
         className ?? ""
       }`}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

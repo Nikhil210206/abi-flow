@@ -1,8 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Lightbulb, Target } from "lucide-react";
-import { stagger, fadeUp, viewportOnce } from "@/lib/motion";
+import { Reveal } from "@/components/ui/Reveal";
 
 const vision = [
   "Delivering trend-setting innovations in process and technology",
@@ -21,18 +18,9 @@ export function VisionMission() {
   return (
     <section className="bg-light py-24 sm:py-32">
       <div className="container-x">
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="grid gap-6 lg:grid-cols-2"
-        >
+        <div className="grid gap-6 lg:grid-cols-2">
           {/* Vision */}
-          <motion.div
-            variants={fadeUp}
-            className="relative overflow-hidden rounded-3xl bg-navy p-9 text-white"
-          >
+          <Reveal className="relative overflow-hidden rounded-3xl bg-navy p-9 text-white">
             <span className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-cyan/20 blur-3xl" />
             <span className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-cyan/15 text-cyan-bright">
               <Lightbulb className="h-6 w-6" />
@@ -51,11 +39,11 @@ export function VisionMission() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </Reveal>
 
           {/* Mission */}
-          <motion.div
-            variants={fadeUp}
+          <Reveal
+            delay={0.1}
             className="relative overflow-hidden rounded-3xl border border-navy/10 bg-white p-9"
           >
             <span className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-magenta/10 blur-3xl" />
@@ -76,8 +64,8 @@ export function VisionMission() {
                 </li>
               ))}
             </ul>
-          </motion.div>
-        </motion.div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
