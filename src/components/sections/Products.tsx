@@ -17,6 +17,8 @@ export function Products() {
         <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {productCategories.map((cat, i) => (
             <Card key={cat.id} delay={(i % 3) * 0.08} className="flex flex-col p-7">
+              {/* top gradient accent — reveals on hover */}
+              <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-cyan via-cyan to-magenta transition-transform duration-300 group-hover:scale-x-100" />
               {/* accent + sector badge */}
               <div className="flex items-center justify-between">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-cyan transition-colors group-hover:bg-cyan group-hover:text-navy">
@@ -45,7 +47,7 @@ export function Products() {
                 {cat.components.map((comp) => (
                   <li
                     key={comp.name}
-                    className="flex flex-col gap-0.5 text-sm sm:flex-row sm:items-baseline sm:justify-between"
+                    className="-mx-2 flex flex-col gap-0.5 rounded-lg px-2 py-1 text-sm transition-colors hover:bg-light sm:flex-row sm:items-baseline sm:justify-between"
                   >
                     <span className="font-medium text-navy">{comp.name}</span>
                     <span className="text-xs text-steel">
