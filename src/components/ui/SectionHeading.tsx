@@ -1,11 +1,13 @@
 import { Reveal } from "./Reveal";
+import { Eyebrow } from "./Eyebrow";
 
 type SectionHeadingProps = {
   eyebrow: string;
-  title: string;
+  title: React.ReactNode;
   description?: string;
   light?: boolean;
   align?: "left" | "center";
+  className?: string;
 };
 
 export function SectionHeading({
@@ -14,31 +16,21 @@ export function SectionHeading({
   description,
   light = false,
   align = "left",
+  className = "",
 }: SectionHeadingProps) {
-  const alignment =
-    align === "center" ? "items-center text-center mx-auto" : "items-start";
-
+  const isCenter = align === "center";
   return (
     <Reveal
-      className={`flex max-w-2xl flex-col ${alignment} ${
-        align === "center" ? "" : ""
-      }`}
+      className={`flex max-w-2xl flex-col gap-5 ${
+        isCenter ? "mx-auto items-center text-center" : "items-start"
+      } ${className}`}
     >
-      <span className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-cyan">
-        <span className="h-px w-8 bg-magenta" />
-        {eyebrow}
-      </span>
-      <h2
-        className={`text-3xl font-bold sm:text-4xl md:text-5xl ${
-          light ? "text-white" : "text-navy"
-        }`}
-      >
-        {title}
-      </h2>
+      <Eyebrow light={light}>{eyebrow}</Eyebrow>
+      <h2 className={`text-h2 ${light ? "text-white" : "text-ink"}`}>{title}</h2>
       {description && (
         <p
-          className={`mt-4 text-base leading-relaxed sm:text-lg ${
-            light ? "text-mist/80" : "text-steel"
+          className={`text-lead max-w-xl ${
+            light ? "text-mist/85" : "text-ink-soft"
           }`}
         >
           {description}

@@ -1,40 +1,59 @@
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Section } from "@/components/ui/Section";
 import { industries } from "@/data/industries";
 
 export function Industries() {
   return (
-    <section className="relative overflow-hidden bg-navy py-24 text-white sm:py-32">
-      <div className="container-x">
-        <SectionHeading
-          eyebrow="Industries We Supply"
-          title="Engineered for demanding environments"
-          description="Our components serve the most critical sectors — where reliability is non-negotiable."
-          light
-        />
+    <Section tone="navy" className="overflow-hidden">
+      <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-cyan/10 blur-[120px]" />
+      <div className="relative grid gap-x-10 gap-y-12 lg:grid-cols-12">
+        {/* sticky heading */}
+        <div className="lg:col-span-4">
+          <div className="lg:sticky lg:top-28">
+            <SectionHeading
+              eyebrow="Industries We Supply"
+              title="Built for the most demanding sectors"
+              description="Where reliability is non-negotiable, our components hold the line."
+              light
+            />
+          </div>
+        </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
-          {industries.map((ind, i) => {
-            const Icon = ind.icon;
-            return (
-              <Reveal
-                key={ind.name}
-                delay={i * 0.07}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-7 hover:bg-white/[0.08]"
-              >
-                <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-cyan/10 blur-2xl" />
-                <span className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-cyan/15 text-cyan-bright">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3 className="relative mt-5 text-lg font-bold">{ind.name}</h3>
-                <p className="relative mt-2 text-sm leading-relaxed text-mist/70">
-                  {ind.blurb}
-                </p>
-              </Reveal>
-            );
-          })}
+        {/* index list */}
+        <div className="lg:col-span-7 lg:col-start-6">
+          <ul className="flex flex-col">
+            {industries.map((ind, i) => {
+              const Icon = ind.icon;
+              return (
+                <Reveal
+                  as="li"
+                  key={ind.name}
+                  delay={i * 0.06}
+                  className="group flex items-center gap-5 border-t border-white/10 py-6 transition-colors first:border-t-0 hover:bg-white/[0.03] sm:gap-7"
+                >
+                  <span className="font-mono text-sm text-cyan-bright/70">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 text-cyan-bright ring-1 ring-white/10 transition-colors group-hover:bg-cyan/15">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-lg font-semibold text-white">
+                      {ind.name}
+                    </h3>
+                    <p className="mt-0.5 truncate text-sm text-mist/60">
+                      {ind.blurb}
+                    </p>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-white/20 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-cyan" />
+                </Reveal>
+              );
+            })}
+          </ul>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

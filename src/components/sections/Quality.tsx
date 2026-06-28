@@ -1,8 +1,9 @@
-import { BadgeCheck, RefreshCcw, Users, HeartHandshake } from "lucide-react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { BadgeCheck, RefreshCcw, Users, HeartHandshake, Quote } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Section } from "@/components/ui/Section";
 
-const cycle = [
+const principles = [
   { label: "Customer Satisfaction", icon: HeartHandshake },
   { label: "Continuous Improvement", icon: RefreshCcw },
   { label: "Total Participation", icon: Users },
@@ -10,68 +11,69 @@ const cycle = [
 
 export function Quality() {
   return (
-    <section id="quality" className="bg-white py-24 sm:py-32">
-      <div className="container-x grid items-center gap-14 lg:grid-cols-2">
-        <div>
-          <SectionHeading
-            eyebrow="Quality & Certifications"
-            title="Quality is built into every cut"
-            description="ABI Flow Products operates a management system certified to ISO 9001:2015 by TÜV NORD — covering the manufacture and supply of machined metal components."
-          />
+    <Section id="quality" tone="white">
+      <div className="grid gap-x-12 gap-y-12 lg:grid-cols-12">
+        {/* credential column */}
+        <div className="lg:col-span-5">
+          <Reveal className="flex flex-col gap-6">
+            <Eyebrow>Quality &amp; Certifications</Eyebrow>
+            <h2 className="text-h2 text-ink">Quality is built into every cut</h2>
+            <p className="text-lead text-ink-soft">
+              Our management system is certified to ISO 9001:2015 by TÜV NORD,
+              covering the manufacture and supply of machined metal components.
+            </p>
 
-          <Reveal className="mt-8 inline-flex items-center gap-4 rounded-2xl border border-navy/10 bg-light px-6 py-4">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-cyan">
-              <BadgeCheck className="h-6 w-6" />
-            </span>
-            <div>
-              <p className="font-display text-lg font-bold text-navy">
-                ISO 9001:2015
-              </p>
-              <p className="text-sm text-steel">Certified by TÜV NORD</p>
+            <div className="mt-2 flex items-center gap-4 rounded-2xl border border-line bg-light px-6 py-5">
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-cyan">
+                <BadgeCheck className="h-6 w-6" />
+              </span>
+              <div>
+                <p className="font-display text-lg font-semibold text-ink">
+                  ISO 9001:2015
+                </p>
+                <p className="text-sm text-steel">Certified by TÜV NORD</p>
+              </div>
             </div>
           </Reveal>
-
-          <Reveal className="mt-6 max-w-lg rounded-2xl bg-navy p-7 text-mist/85">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan">
-              Quality Policy
-            </p>
-            <p className="mt-3 leading-relaxed">
-              Committed to satisfy our customers through effective implementation
-              of the Quality Management System, a continual-improvement approach,
-              resource management, and compliance with statutory and regulatory
-              requirements.
-            </p>
-          </Reveal>
         </div>
 
-        {/* quality cycle */}
-        <div className="relative mx-auto flex max-w-md flex-col gap-4">
-          <div className="absolute left-6 top-6 bottom-6 w-px bg-gradient-to-b from-cyan via-magenta to-lime" />
-          {cycle.map((c, i) => {
-            const Icon = c.icon;
-            return (
-              <Reveal
-                key={c.label}
-                delay={i * 0.1}
-                className="relative flex items-center gap-5 rounded-2xl border border-navy/10 bg-white p-5 shadow-sm"
-              >
-                <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy text-cyan">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <span className="font-display text-lg font-bold text-navy">
-                  {c.label}
-                </span>
-              </Reveal>
-            );
-          })}
-          <Reveal
-            delay={0.3}
-            className="mt-2 text-center text-sm font-medium text-steel"
-          >
-            A self-reinforcing cycle at the core of our Quality Policy.
+        {/* pull-quote + principles */}
+        <div className="lg:col-span-6 lg:col-start-7">
+          <Reveal className="relative overflow-hidden rounded-[1.75rem] bg-navy p-9 text-white sm:p-11">
+            <Quote
+              className="absolute right-8 top-8 h-16 w-16 text-white/5"
+              aria-hidden
+            />
+            <p className="text-eyebrow text-cyan-bright">Our Quality Policy</p>
+            <blockquote className="mt-5 font-display text-xl font-medium leading-snug text-white sm:text-2xl">
+              “Committed to satisfy our customers through effective
+              implementation of the Quality Management System, continual
+              improvement, resource management, and compliance with statutory
+              and regulatory requirements.”
+            </blockquote>
           </Reveal>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {principles.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <Reveal
+                  key={p.label}
+                  delay={i * 0.08}
+                  className="flex flex-col gap-3 rounded-2xl border border-line bg-white p-5"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan/10 text-cyan-deep">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-sm font-semibold text-ink">
+                    {p.label}
+                  </span>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

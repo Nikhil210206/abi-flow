@@ -28,6 +28,8 @@ export function CountUp({
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
+      // Reduced motion: jump straight to the final value (intentional).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setValue(to);
       return;
     }

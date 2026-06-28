@@ -1,51 +1,64 @@
 import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Button } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
 
 const stats = [
-  { value: 44, suffix: "", label: "Years of Experience" },
-  { value: 100, suffix: "%", label: "Components Inspected & Tested" },
-  { value: 24, suffix: "K", label: "Sq.ft Manufacturing Facility" },
-  { value: 5, suffix: "+", label: "Global OEM Customers" },
+  { value: 44, suffix: "", label: "Years of experience", note: "Manufacturing since 1980" },
+  { value: 100, suffix: "%", label: "Inspected & tested", note: "To international standards, pre-dispatch" },
+  { value: 24, suffix: "K", label: "Sq.ft facility", note: "Multi-axis CNC & in-house metrology" },
+  { value: 5, suffix: "+", label: "Global OEM clients", note: "Across Oil & Gas and renewables" },
 ];
 
 export function Stats() {
   return (
-    <section id="about" className="relative bg-white py-24 sm:py-32">
-      <div className="container-x">
-        <SectionHeading
-          eyebrow="About Us"
-          title="Four decades of machining precision"
-          description="We are an ISO 9001:2015 company catering to both domestic and international business — delivering high-quality machined metal components at a competitive price, inspected at every stage and tested 100% to international standards before dispatch."
-        />
-
-        <div className="mt-16 grid grid-cols-2 gap-6 lg:grid-cols-4">
-          {stats.map((s, i) => (
-            <Reveal
-              key={s.label}
-              delay={i * 0.08}
-              className="relative rounded-2xl border border-navy/10 bg-light p-7"
-            >
-              <span className="absolute left-7 top-0 h-1 w-12 -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan to-magenta" />
-              <div className="font-display text-4xl font-bold text-navy sm:text-5xl">
-                <CountUp to={s.value} suffix={s.suffix} />
-              </div>
-              <p className="mt-2 text-sm font-medium text-steel">{s.label}</p>
-            </Reveal>
-          ))}
+    <Section id="about" tone="white">
+      <div className="grid gap-x-10 gap-y-12 lg:grid-cols-12">
+        {/* statement */}
+        <div className="lg:col-span-5">
+          <Reveal className="flex flex-col gap-6">
+            <Eyebrow>About ABI Flow</Eyebrow>
+            <h2 className="text-h2 text-ink">
+              Four decades of machining the parts others can&apos;t.
+            </h2>
+            <p className="text-lead text-ink-soft">
+              An ISO 9001:2015 company serving domestic and international
+              business — delivering high-quality machined metal components at a
+              competitive price, inspected at every stage and tested 100% before
+              dispatch.
+            </p>
+            <div className="pt-2">
+              <Button href="#facility" variant="ghost" withArrow>
+                See our facility
+              </Button>
+            </div>
+          </Reveal>
         </div>
 
-        <Reveal className="mt-10 rounded-2xl border border-navy/10 bg-navy p-8 text-mist/85 sm:p-10">
-          <p className="text-lg leading-relaxed sm:text-xl">
-            <span className="font-semibold text-white">
-              Equipped with the latest machinery
-            </span>{" "}
-            and metrology instruments for manufacturing critical machined
-            components — our quality system ensures every part meets the exacting
-            demands of severe-service flow control.
-          </p>
-        </Reveal>
+        {/* stat rows */}
+        <div className="lg:col-span-6 lg:col-start-7">
+          <dl className="flex flex-col">
+            {stats.map((s, i) => (
+              <Reveal
+                key={s.label}
+                delay={i * 0.08}
+                className={`flex items-baseline justify-between gap-6 py-7 ${
+                  i !== 0 ? "border-t border-line" : ""
+                }`}
+              >
+                <div>
+                  <dt className="text-base font-semibold text-ink">{s.label}</dt>
+                  <dd className="mt-1 text-sm text-steel">{s.note}</dd>
+                </div>
+                <span className="font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+                  <CountUp to={s.value} suffix={s.suffix} />
+                </span>
+              </Reveal>
+            ))}
+          </dl>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }

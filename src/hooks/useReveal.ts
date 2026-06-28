@@ -24,6 +24,8 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
     if (!el || shown) return;
 
     if (typeof IntersectionObserver === "undefined") {
+      // Fail open: no observer support -> show immediately (intentional).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShown(true);
       return;
     }

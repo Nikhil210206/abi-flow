@@ -1,72 +1,66 @@
-import { Lightbulb, Target } from "lucide-react";
+import { Lightbulb, Target, Check } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { Section } from "@/components/ui/Section";
 
 const vision = [
-  "Delivering trend-setting innovations in process and technology",
+  "Trend-setting innovation in process and technology",
   "High-performance products without quality compromise",
-  "Outstanding service to our customers",
+  "Outstanding service to every customer",
 ];
 
 const mission = [
   "Deliver quality products at the right price",
   "Retain our customers",
   "Retain our employees",
-  "Process innovation",
+  "Relentless process innovation",
 ];
 
 export function VisionMission() {
   return (
-    <section className="bg-light py-24 sm:py-32">
-      <div className="container-x">
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* Vision */}
-          <Reveal className="relative overflow-hidden rounded-3xl bg-navy p-9 text-white">
-            <span className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-cyan/20 blur-3xl" />
-            <span className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-cyan/15 text-cyan-bright">
+    <Section tone="cloud">
+      <div className="grid gap-5 lg:grid-cols-12">
+        {/* Vision — featured dark panel */}
+        <Reveal className="relative overflow-hidden rounded-[1.75rem] bg-navy p-9 text-white sm:p-11 lg:col-span-7">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cyan/20 blur-3xl" />
+          <div className="relative">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan/15 text-cyan-bright ring-1 ring-white/10">
               <Lightbulb className="h-6 w-6" />
             </span>
-            <p className="relative mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-bright">
+            <p className="mt-6 text-eyebrow text-cyan-bright">
               Perfection is our passion
             </p>
-            <h3 className="relative mt-2 text-2xl font-bold sm:text-3xl">
-              Our Vision
-            </h3>
-            <ul className="relative mt-6 space-y-3">
+            <h3 className="mt-2 text-h3 text-white">Our Vision</h3>
+            <ul className="mt-7 space-y-3.5">
               {vision.map((v) => (
-                <li key={v} className="flex gap-3 text-mist/85">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" />
-                  <span>{v}</span>
+                <li key={v} className="flex items-start gap-3 text-mist/85">
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-cyan" />
+                  <span className="text-lead">{v}</span>
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
+        </Reveal>
 
-          {/* Mission */}
-          <Reveal
-            delay={0.1}
-            className="relative overflow-hidden rounded-3xl border border-navy/10 bg-white p-9"
-          >
-            <span className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-magenta/10 blur-3xl" />
-            <span className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-magenta/10 text-magenta">
-              <Target className="h-6 w-6" />
-            </span>
-            <p className="relative mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-magenta">
-              What drives us
-            </p>
-            <h3 className="relative mt-2 text-2xl font-bold text-navy sm:text-3xl">
-              Our Mission
-            </h3>
-            <ul className="relative mt-6 space-y-3">
-              {mission.map((m) => (
-                <li key={m} className="flex gap-3 text-steel">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-magenta" />
-                  <span>{m}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
+        {/* Mission — light panel */}
+        <Reveal
+          delay={0.1}
+          className="relative overflow-hidden rounded-[1.75rem] border border-line bg-white p-9 sm:p-11 lg:col-span-5"
+        >
+          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-magenta/10 text-magenta">
+            <Target className="h-6 w-6" />
+          </span>
+          <p className="mt-6 text-eyebrow text-magenta">What drives us</p>
+          <h3 className="mt-2 text-h3 text-ink">Our Mission</h3>
+          <ul className="mt-7 space-y-3.5">
+            {mission.map((m) => (
+              <li key={m} className="flex items-start gap-3 text-ink-soft">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-magenta" />
+                <span>{m}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -1,36 +1,32 @@
-"use client";
-
 import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { customers } from "@/data/customers";
 
 export function Customers() {
   return (
-    <section id="customers" className="border-y border-navy/10 bg-light py-20">
+    <section
+      id="customers"
+      className="relative border-y border-line bg-cloud py-14 sm:py-16"
+    >
       <div className="container-x">
-        <Reveal className="text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan">
-            Our Valuable Customers
+        <Reveal className="flex flex-col items-center gap-2 text-center">
+          <span className="text-eyebrow text-steel">
+            Trusted by global flow-control &amp; energy leaders
           </span>
-          <p className="mx-auto mt-3 max-w-2xl text-lg text-steel">
-            Trusted as a manufacturing partner by global flow-control and energy
-            leaders.
-          </p>
         </Reveal>
       </div>
 
-      <div className="relative mt-12">
-        {/* edge fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-light to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-light to-transparent" />
+      <div className="relative mt-10">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-28 bg-gradient-to-r from-cloud to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-28 bg-gradient-to-l from-cloud to-transparent" />
 
         <Marquee>
           {customers.map((c, i) => (
             <div
               key={`${c.name}-${i}`}
-              className="flex min-w-[240px] flex-col rounded-2xl border border-navy/10 bg-white px-7 py-5 shadow-sm"
+              className="group flex min-w-[230px] flex-col rounded-2xl border border-line bg-white/70 px-7 py-5 transition-colors hover:border-cyan/40"
             >
-              <span className="font-display text-xl font-bold text-navy">
+              <span className="font-display text-xl font-semibold tracking-tight text-ink-soft transition-colors group-hover:text-ink">
                 {c.name}
               </span>
               <span className="mt-1 text-sm text-steel">{c.detail}</span>
