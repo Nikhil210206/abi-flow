@@ -2,12 +2,19 @@ import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Section } from "@/components/ui/Section";
+import { Parallax } from "@/components/ui/Parallax";
 import { industries } from "@/data/industries";
 
 export function Industries() {
   return (
     <Section tone="navy" className="overflow-hidden">
-      <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-cyan/10 blur-[120px]" />
+      <Parallax
+        distance={200}
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-1/3"
+      >
+        <div className="h-96 w-96 rounded-full bg-cyan/10 blur-[120px]" />
+      </Parallax>
       <div className="relative grid gap-x-10 gap-y-12 lg:grid-cols-12">
         {/* sticky heading */}
         <div className="lg:col-span-4">

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
+import { Magnetic } from "./Magnetic";
 
 type Variant = "primary" | "secondary" | "ghost" | "outline-light";
 type Size = "md" | "lg";
@@ -9,11 +10,9 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-cyan text-navy hover:bg-cyan-bright hover:-translate-y-0.5 shadow-[0_8px_24px_-10px_rgba(22,181,224,0.7)]",
-  secondary:
-    "bg-navy text-white hover:bg-navy-600 hover:-translate-y-0.5",
-  ghost:
-    "text-ink hover:text-cyan-deep",
+    "bg-cyan text-navy hover:bg-cyan-bright shadow-[0_8px_24px_-10px_rgba(22,181,224,0.7)]",
+  secondary: "bg-navy text-white hover:bg-navy-600",
+  ghost: "text-ink hover:text-cyan-deep",
   "outline-light":
     "border border-white/20 text-white hover:bg-white/10 hover:border-white/35 backdrop-blur-sm",
 };
@@ -30,10 +29,11 @@ type ButtonProps = {
   size?: Size;
   withArrow?: boolean;
   external?: boolean;
+  magnetic?: boolean;
   className?: string;
 };
 
-/** Single source of truth for CTAs — consistent shape, weight, and motion. */
+/** Single source of truth for CTAs — consistent shape, weight, motion. */
 export function Button({
   href,
   children,
@@ -41,9 +41,10 @@ export function Button({
   size = "md",
   withArrow = false,
   external = false,
+  magnetic = false,
   className = "",
 }: ButtonProps) {
-  return (
+  const link = (
     <a
       href={href}
       target={external ? "_blank" : undefined}
@@ -56,4 +57,6 @@ export function Button({
       )}
     </a>
   );
+
+  return magnetic ? <Magnetic>{link}</Magnetic> : link;
 }

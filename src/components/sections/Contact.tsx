@@ -3,6 +3,7 @@ import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
+import { Parallax } from "@/components/ui/Parallax";
 
 const quickLinks = [
   { label: "About", href: "#about" },
@@ -40,8 +41,16 @@ export function Contact() {
     <footer id="contact" className="relative overflow-hidden bg-navy text-white">
       <div className="h-1 w-full bg-gradient-to-r from-cyan via-magenta to-lime" />
 
+      <Parallax
+        distance={180}
+        aria-hidden
+        className="pointer-events-none absolute right-0 top-20"
+      >
+        <div className="h-80 w-80 rounded-full bg-cyan/10 blur-[130px]" />
+      </Parallax>
+
       {/* CTA band */}
-      <div className="container-x section-y">
+      <div className="container-x section-y relative">
         <div className="grid items-end gap-10 lg:grid-cols-12">
           <Reveal className="lg:col-span-8">
             <Eyebrow light>Get in touch</Eyebrow>
@@ -55,10 +64,10 @@ export function Contact() {
             </p>
           </Reveal>
           <Reveal delay={0.1} className="flex flex-wrap gap-4 lg:col-span-4 lg:justify-end">
-            <Button href="mailto:afppur@gmail.com" variant="primary" size="lg" withArrow>
+            <Button href="mailto:afppur@gmail.com" variant="primary" size="lg" withArrow magnetic>
               Request a Quote
             </Button>
-            <Button href="tel:+919840999101" variant="outline-light" size="lg">
+            <Button href="tel:+919840999101" variant="outline-light" size="lg" magnetic>
               Call Us
             </Button>
           </Reveal>

@@ -1,8 +1,10 @@
+import { Building2 } from "lucide-react";
 import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
+import { Media } from "@/components/ui/Media";
 
 const stats = [
   { value: 44, suffix: "", label: "Years of experience", note: "Manufacturing since 1980" },
@@ -29,10 +31,19 @@ export function Stats() {
               dispatch.
             </p>
             <div className="pt-2">
-              <Button href="#facility" variant="ghost" withArrow>
+              <Button href="#facility" variant="ghost" withArrow magnetic>
                 See our facility
               </Button>
             </div>
+            <Media
+              ratio="photo"
+              icon={Building2}
+              label="ABI Flow — Ambattur, Chennai"
+              tone="navy"
+              alt="ABI Flow Products manufacturing facility in Chennai"
+              className="mt-4"
+              sizes="(max-width: 1024px) 100vw, 40vw"
+            />
           </Reveal>
         </div>
 

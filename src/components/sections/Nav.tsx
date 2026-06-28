@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 const links = [
   { label: "About", href: "#about" },
@@ -67,12 +68,14 @@ export function Nav() {
             ))}
           </ul>
 
-          <a
-            href="#contact"
-            className="hidden h-10 items-center rounded-full bg-navy px-5 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5 md:inline-flex"
-          >
-            Get a Quote
-          </a>
+          <Magnetic className="hidden md:inline-flex">
+            <a
+              href="#contact"
+              className="inline-flex h-10 items-center rounded-full bg-navy px-5 text-sm font-semibold text-white"
+            >
+              Get a Quote
+            </a>
+          </Magnetic>
 
           <button
             type="button"

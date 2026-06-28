@@ -1,7 +1,8 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Boxes } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Section } from "@/components/ui/Section";
+import { Media } from "@/components/ui/Media";
 import { productCategories, type ProductCategory } from "@/data/products";
 
 // Asymmetric bento weighting — never a uniform grid.
@@ -82,6 +83,18 @@ export function Products() {
                   }`}
                 />
                 <CardHead cat={cat} index={i} />
+
+                {i === 0 && (
+                  <Media
+                    ratio="wide"
+                    icon={Boxes}
+                    label="Plug Valve Internals"
+                    tone="steel"
+                    alt="Machined plug valve internal components"
+                    className="mt-5"
+                    sizes="(max-width: 1024px) 100vw, 55vw"
+                  />
+                )}
 
                 <div className={wide ? "lg:grid lg:grid-cols-2 lg:gap-8" : ""}>
                   <div className="mt-5">

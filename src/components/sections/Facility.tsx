@@ -2,11 +2,19 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Gauge } from "lucide-react";
+import { ChevronDown, Gauge, Factory, Cog, ScanLine } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
+import { Parallax } from "@/components/ui/Parallax";
+import { Media } from "@/components/ui/Media";
+
+const gallery = [
+  { label: "CNC Shop Floor", icon: Factory, ratio: "photo" as const },
+  { label: "Turning Cell", icon: Cog, ratio: "photo" as const },
+  { label: "Inspection Lab", icon: ScanLine, ratio: "photo" as const },
+];
 import { machineHighlights, machinery } from "@/data/machinery";
 import { instruments } from "@/data/instruments";
 
@@ -67,11 +75,38 @@ function Collapsible({
 export function Facility() {
   return (
     <Section id="facility" tone="light">
-      <SectionHeading
-        eyebrow="Facility & Infrastructure"
-        title="A 24,000 sq.ft precision machining plant"
-        description="Multi-axis CNC turning and machining centres, grinding, and full in-house metrology — engineered around a zero-defect quality flow."
-      />
+      {/* parallax depth (decorative) */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <Parallax distance={240} aria-hidden className="absolute -right-24 top-24">
+          <div className="h-72 w-72 rounded-full bg-cyan/12 blur-[120px]" />
+        </Parallax>
+        <Parallax distance={-190} aria-hidden className="absolute -left-20 bottom-40">
+          <div className="h-64 w-64 rounded-full bg-magenta/[0.08] blur-[120px]" />
+        </Parallax>
+      </div>
+
+      <div className="relative">
+        <SectionHeading
+          eyebrow="Facility & Infrastructure"
+          title="A 24,000 sq.ft precision machining plant"
+          description="Multi-axis CNC turning and machining centres, grinding, and full in-house metrology — engineered around a zero-defect quality flow."
+        />
+
+        {/* plant gallery */}
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {gallery.map((g, i) => (
+            <Reveal key={g.label} delay={i * 0.08}>
+              <Media
+                ratio={g.ratio}
+                icon={g.icon}
+                label={g.label}
+                tone="steel"
+                alt={`ABI Flow facility — ${g.label}`}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </Reveal>
+          ))}
+        </div>
 
       {/* process timeline */}
       <div className="relative mt-14">
@@ -194,6 +229,7 @@ export function Facility() {
             </div>
           </Collapsible>
         </Reveal>
+        </div>
       </div>
     </Section>
   );

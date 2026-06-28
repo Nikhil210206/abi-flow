@@ -6,6 +6,7 @@ import { FlowBackground } from "@/components/visuals/FlowBackground";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
 import { Button } from "@/components/ui/Button";
+import { Parallax } from "@/components/ui/Parallax";
 
 function SpecStat({ value, label }: { value: string; label: string }) {
   return (
@@ -61,10 +62,10 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={0.24} className="mt-9 flex flex-wrap items-center gap-4">
-              <Button href="#products" variant="primary" size="lg" withArrow>
+              <Button href="#products" variant="primary" size="lg" withArrow magnetic>
                 Explore Our Products
               </Button>
-              <Button href="#contact" variant="outline-light" size="lg">
+              <Button href="#contact" variant="outline-light" size="lg" magnetic>
                 Request a Quote
               </Button>
             </Reveal>
@@ -72,6 +73,7 @@ export function Hero() {
 
           {/* RIGHT — glass spec panel */}
           <Reveal delay={0.2} className="lg:col-span-5">
+            <Parallax distance={80}>
             <div className="glass relative overflow-hidden rounded-[1.75rem] p-8 shadow-2xl">
               <div className="pointer-events-none absolute -right-16 -top-16 h-60 w-60 rounded-full bg-cyan/20 blur-3xl" />
 
@@ -120,6 +122,7 @@ export function Hero() {
                 </div>
               </div>
             </div>
+            </Parallax>
           </Reveal>
         </div>
       </div>
